@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Clock_ScreenSaver
+namespace Clock_ScreenSaver.Views
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für ConfigWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ConfigWindow : Window
     {
-        public MainWindow()
+        public ConfigWindow()
         {
             InitializeComponent();
         }
