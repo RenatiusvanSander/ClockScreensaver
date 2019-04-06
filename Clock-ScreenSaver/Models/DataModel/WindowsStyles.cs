@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Clock_ScreenSaver.Models.DataModel
 {
+
+    /// <summary>
+    /// Defines the window stiles for the preview window.
+    /// </summary>
     public abstract class WindowStyles
     {
         public const uint WS_OVERLAPPED = 0x00000000;
@@ -17,7 +21,9 @@ namespace Clock_ScreenSaver.Models.DataModel
         public const uint WS_CLIPSIBLINGS = 0x04000000;
         public const uint WS_CLIPCHILDREN = 0x02000000;
         public const uint WS_MAXIMIZE = 0x01000000;
-        public const uint WS_CAPTION = 0x00C00000;     /* WS_BORDER | WS_DLGFRAME  */
+        public const uint WS_CAPTION = 0x00C00000;
+        
+        /* WS_BORDER | WS_DLGFRAME  */
         public const uint WS_BORDER = 0x00800000;
         public const uint WS_DLGFRAME = 0x00400000;
         public const uint WS_VSCROLL = 0x00200000;
@@ -36,7 +42,6 @@ namespace Clock_ScreenSaver.Models.DataModel
         public const uint WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW;
 
         // Common Window Styles
-
         public const uint WS_OVERLAPPEDWINDOW =
             (WS_OVERLAPPED |
               WS_CAPTION |
@@ -80,20 +85,20 @@ namespace Clock_ScreenSaver.Models.DataModel
 
         public const uint WS_EX_OVERLAPPEDWINDOW = (WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE);
         public const uint WS_EX_PALETTEWINDOW = (WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST);
-        //#endif /* WINVER >= 0x0400 */
+        // #endif /* WINVER >= 0x0400 */
 
-        //#if(_WIN32_WINNT >= 0x0500)
+        // #if(_WIN32_WINNT >= 0x0500)
         public const uint WS_EX_LAYERED = 0x00080000;
-        //#endif /* _WIN32_WINNT >= 0x0500 */
+        // #endif /* _WIN32_WINNT >= 0x0500 */
 
-        //#if(WINVER >= 0x0500)
+        // #if(WINVER >= 0x0500)
         public const uint WS_EX_NOINHERITLAYOUT = 0x00100000; // Disable inheritence of mirroring by children
         public const uint WS_EX_LAYOUTRTL = 0x00400000; // Right to left mirroring
-        //#endif /* WINVER >= 0x0500 */
+        // #endif /* WINVER >= 0x0500 */
 
-        //#if(_WIN32_WINNT >= 0x0500)
+        // #if(_WIN32_WINNT >= 0x0500)
         public const uint WS_EX_COMPOSITED = 0x02000000;
         public const uint WS_EX_NOACTIVATE = 0x08000000;
-        //#endif /* _WIN32_WINNT >= 0x0500 */
+        // #endif /* _WIN32_WINNT >= 0x0500 */
     }
 }

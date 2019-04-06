@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Clock_ScreenSaver.ViewModels;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Clock_ScreenSaver.Views
 {
@@ -21,19 +10,85 @@ namespace Clock_ScreenSaver.Views
     /// </summary>
     public partial class ClockWindow : Window
     {
+        private ClockWindowViewModel clockWindowViewModel;
+
+        //start off OriginalLoction with an X and Y of int.MaxValue, because
+        //it is impossible for the cursor to be at that position. That way, we
+        //know if this variable has been set yet.
+        Point OriginalLocation = new Point(int.MaxValue, int.MaxValue);
+
+        /// <summary>
+        /// Ctor.
+        /// </summary>
         public ClockWindow()
         {
             InitializeComponent();
+            clockWindowViewModel = new ClockWindowViewModel();
+            DataContext = clockWindowViewModel;
         }
 
+        /// <summary>
+        /// Maybe there will be things loaded after the clock window is loaded.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">RoutedEventArgs</param>
         private void ClockWindow_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Exits on Button Click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">RoutedEventArgs</param>
         private void QuitBtn_Click(object sender, RoutedEventArgs e)
         {
+            clockWindowViewModel.CloseWindow(this);
+        }
 
+        /// <summary>
+        /// Exits on KeyDown.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">KeyEventArgs</param>
+        private void ClockWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            clockWindowViewModel.CloseWindow(this);
+        }
+
+        /// <summary>
+        /// Exits on MouseMove.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">MouseEventArgs</param>
+        private void ClockWindow_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+
+            //see if originallocation has been set
+            if (OriginalLocation.X == int.MaxValue &
+                OriginalLocation.Y == int.MaxValue)
+            {
+                OriginalLocation = e.GetPosition((Window)sender);
+            }
+
+            //see if the mouse has moved more than 20 pixels 
+            //in any direction. If it has, close the application.
+            if (Math.Abs(e.GetPosition((Window)sender).X - OriginalLocation.X) > 20 |
+                Math.Abs(e.GetPosition((Window)sender).Y - OriginalLocation.Y) > 20)
+            {
+                clockWindowViewModel.CloseWindow(this);
+            }
+        }
+
+        /// <summary>
+        /// Exits on MouseDown.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">MouseButtonEventArgs</param>
+        private void ClockWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            clockWindowViewModel.CloseWindow(this);
         }
     }
 }
