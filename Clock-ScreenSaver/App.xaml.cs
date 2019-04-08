@@ -12,39 +12,60 @@ using Clock_ScreenSaver.Models.DataModel;
 
 namespace Clock_ScreenSaver
 {
+
     /// <summary>
     /// Interaktionslogik für "App.xaml"
     /// </summary>
     public partial class App : System.Windows.Application
     {
-        private const string A = "/a";
+
+        // These are the command line arguments of windows.
+        // s -> start
+        // c -> configure
+        // p -> preview
+        // i -> install screensaver
         private const string S = "/s";
         private const string C = "/c";
         private const string P = "/p";
         private const string I = "/i";
+
+        // This are important varies for the preview.
         private HwndSource winWPFContent;
         private ClockWindow previewClockWindow;
 
+        /// <summary>
+        /// Ctor.
+        /// </summary>
         public App()
         {
             Startup += Application_Startup;
         }
 
+        /// <summary>
+        /// Starts the app and computes the command line arguments from windows
+        /// os or exits.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">StartupEventArgs</param>
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             string[] stringCommandLineArguments = null;
 
-            if(e.Args.Length > 0)
+            // Closes the application, because an error happened.
+            if (e.Args.Length < 1)
             {
-                stringCommandLineArguments = e.Args;
+                Environment.Exit(1);
             }
 
-            if(stringCommandLineArguments?.Length > 0)
+            // Compute the command line arguments, if there are some.
+            else
             {
-                switch(stringCommandLineArguments[0].ToLower().Trim().Substring(0, 2))
+                stringCommandLineArguments = e.Args;
+
+                // Identify and execute preview, start or config.
+                switch (stringCommandLineArguments[0].ToLower().Trim().Substring(0, 2))
                 {
-                    case A:
-                        break;
+                    // Start case of screensaver.
                     case S:
                         ShowScreenSaver();
                         break;
@@ -53,7 +74,7 @@ namespace Clock_ScreenSaver
 
                     // Preview case of screensaver.
                     case P:
-                        PreviewScreensaver(e);                        
+                        PreviewScreensaver(e);
                         break;
 
                     // Configure case of screensaver.
@@ -61,13 +82,19 @@ namespace Clock_ScreenSaver
                         ConfigWindow configWindow = new ConfigWindow();
                         configWindow.Show();
                         break;
+
+                    // Default case of screensaver starts the screensaver.
                     default:
                         ShowScreenSaver();
                         break;
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Shows the screensaver on every monitor. This is a multi monitor
+        /// application.
+        /// </summary>
         private void ShowScreenSaver()
         {
             Window ownerWindow = null;
@@ -78,42 +105,52 @@ namespace Clock_ScreenSaver
                 ClockWindow clockWindow = new ClockWindow();
 
                 // Sets Windows Properties.
-                // clockWindow.WindowState = WindowState.Maximized;
                 clockWindow.WindowStyle = WindowStyle.None;
-                // clockWindow.ShowInTaskbar = false;
-                                
+
                 // Creates the primary window.
                 if (!screen.Primary)
                 {
 
+                    // Positions other windows on other screens.
                     clockWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                     clockWindow.Top = screen.WorkingArea.Top;
                     clockWindow.Left = screen.WorkingArea.Left;
                 }
                 else
                 {
+
+                    // Changes owner of not primary screens.
                     ownerWindow = clockWindow;
                 }
 
                 clockWindow.Show();
             }
-            
-            foreach(Window window in Windows)
+
+            // Sets window on primary screen as owner to close every window
+            // on closing.
+            foreach (Window window in Windows)
             {
-                if(window.Owner != ownerWindow.Owner)
+
+                // Sets primary window as owner of windows on other screens.
+                if (window.Owner != ownerWindow?.Owner)
                 {
                     window.Owner = ownerWindow;
                 }
             }
         }
 
+        /// <summary>
+        /// Previews the screensaver in screen saver small window.
+        /// For that the window handle is needed and set to this.
+        /// </summary>
+        /// <param name="e">StartupEventArgs</param>
         private void PreviewScreensaver(StartupEventArgs e)
         {
             previewClockWindow = new ClockWindow();
             Int32 previewHandle = Convert.ToInt32(e.Args[1]);
             IntPtr pPreviewHnd = new IntPtr(previewHandle);
 
-            // Receives window size of Win32API.
+            // Receives window size via RECT and Win32API.
             RECT lpRect = new RECT();
             bool bGetRect = Win32API.GetClientRect(pPreviewHnd, ref lpRect);
 
@@ -129,10 +166,13 @@ namespace Clock_ScreenSaver
 
             // Transmits pcitures to screensaver window of windows.
             winWPFContent = new HwndSource(sourceParams);
-            winWPFContent.Disposed += new EventHandler(winWPFContent_Disposed);
+            winWPFContent.Disposed += new EventHandler(WinWPFContent_Disposed);
             winWPFContent.RootVisual = previewClockWindow.border1;
         }
 
+        /// <summary>
+        /// Initializes the screensaver, if there is something to initialize.
+        /// </summary>
         private void InitApplication()
         {
         }
@@ -143,9 +183,9 @@ namespace Clock_ScreenSaver
         /// do this, Task Manager would get a new .scr instance every time
         /// we opened Screen Saver dialog or switched dropdown to this saver.
         /// </summary>
-        /// <param name = "sender" ></ param >
-        /// < param name="e"></param>
-        void winWPFContent_Disposed(object sender, EventArgs e)
+        /// <param name = "sender" >object</ param >
+        /// < param name="e">EventArgs</param>
+        void WinWPFContent_Disposed(object sender, EventArgs e)
         {
             previewClockWindow.Close();
         }

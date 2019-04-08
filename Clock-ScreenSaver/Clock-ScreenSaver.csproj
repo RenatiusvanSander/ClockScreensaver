@@ -69,8 +69,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\DataModel\RECT.cs" />
+    <Compile Include="Models\LogicModel\ClockTimer.cs" />
+    <Compile Include="Models\LogicModel\ConfigRegistryHandler.cs" />
     <Compile Include="Models\LogicModel\Win32API.cs" />
     <Compile Include="Models\DataModel\WindowsStyles.cs" />
+    <Compile Include="ViewModels\ClockWindowViewModel.cs" />
+    <Compile Include="ViewModels\ConfigWindowViewModel.cs" />
     <Compile Include="Views\ClockWindow.xaml.cs">
       <DependentUpon>ClockWindow.xaml</DependentUpon>
     </Compile>
@@ -104,9 +108,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ClockWindow.xaml">
       <SubType>Designer</SubType>
