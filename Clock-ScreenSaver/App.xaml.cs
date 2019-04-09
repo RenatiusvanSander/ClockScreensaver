@@ -9,6 +9,8 @@ using System.Windows.Interop;
 // Here you will find WindowsStyles.
 using Clock_ScreenSaver.Models.LogicModel;
 using Clock_ScreenSaver.Models.DataModel;
+using System.IO;
+using System.Reflection;
 
 namespace Clock_ScreenSaver
 {
@@ -29,15 +31,20 @@ namespace Clock_ScreenSaver
         private const string P = "/p";
         private const string I = "/i";
 
+        private const string SCR_FILE_NAME = "Clock-ScreenSaver.scr";
+
         // This are important varies for the preview.
         private HwndSource winWPFContent;
         private ClockWindow previewClockWindow;
+
+        private RegistryHandler registryHandler;
 
         /// <summary>
         /// Ctor.
         /// </summary>
         public App()
         {
+            InitApplication();
             Startup += Application_Startup;
         }
 
@@ -70,6 +77,7 @@ namespace Clock_ScreenSaver
                         ShowScreenSaver();
                         break;
                     case I:
+                        InstallScreensaver();
                         break;
 
                     // Preview case of screensaver.
@@ -175,6 +183,43 @@ namespace Clock_ScreenSaver
         /// </summary>
         private void InitApplication()
         {
+            registryHandler = new RegistryHandler();
+        }
+
+        /// <summary>
+        /// Installs the screensaver to user's appData.
+        /// </summary>
+        private void InstallScreensaver()
+        {
+            string appDataPath =Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string screensaverFilePath = Path.Combine(appDataPath, SCR_FILE_NAME);
+            string[] fileNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+
+            // Try to copy screensaver file to disc.
+            try
+            {
+                foreach (String fileName in fileNames)
+                {
+                    using (FileStream fileStream = File.Create(screensaverFilePath))
+                    {
+                        Assembly.GetExecutingAssembly().
+                            GetManifestResourceStream(fileName).
+                            CopyTo(fileStream);
+                    }
+                }
+            }
+
+            // Catch application exception.
+            catch (Exception)
+            {
+                throw new ApplicationException();
+            }
+
+            // Installs screensaver into registry.
+            registryHandler?.SaveSettings(true,
+                true,
+                15,
+                screensaverFilePath);
         }
 
         // <summary>

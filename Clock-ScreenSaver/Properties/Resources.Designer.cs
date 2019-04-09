@@ -59,5 +59,15 @@ namespace Clock_ScreenSaver.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        internal static byte[] Clock_ScreenSaver {
+            get {
+                object obj = ResourceManager.GetObject("Clock_ScreenSaver", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
