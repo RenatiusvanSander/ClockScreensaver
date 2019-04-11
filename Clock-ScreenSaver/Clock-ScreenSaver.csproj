@@ -71,6 +71,7 @@
     <Compile Include="Models\DataModel\RECT.cs" />
     <Compile Include="Models\LogicModel\ClockTimer.cs" />
     <Compile Include="Models\LogicModel\ConfigRegistryHandler.cs" />
+    <Compile Include="Models\LogicModel\LockScreenActive.cs" />
     <Compile Include="Models\LogicModel\Win32API.cs" />
     <Compile Include="Models\DataModel\WindowsStyles.cs" />
     <Compile Include="Models\LogicModel\RegistryHandler.cs" />

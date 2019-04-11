@@ -217,7 +217,7 @@ namespace Clock_ScreenSaver
 
             // Installs screensaver into registry.
             registryHandler?.SaveSettings(true,
-                true,
+                LockScreenActive.GetLockScreenActive(),
                 15,
                 screensaverFilePath);
         }
@@ -230,7 +230,7 @@ namespace Clock_ScreenSaver
         /// </summary>
         /// <param name = "sender" >object</ param >
         /// < param name="e">EventArgs</param>
-        void WinWPFContent_Disposed(object sender, EventArgs e)
+        private void WinWPFContent_Disposed(object sender, EventArgs e)
         {
             previewClockWindow.Close();
         }
