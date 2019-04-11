@@ -18,6 +18,7 @@ namespace Clock_ScreenSaver.ViewModels
     public class ClockWindowViewModel : INotifyPropertyChanged
     {
         private ClockTimer clockTimer;
+        private bool isLockScreenActive;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,12 +31,7 @@ namespace Clock_ScreenSaver.ViewModels
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public bool IsPrevieMode { get; set; } = false;
-
-        /// <summary>
-        /// 
+        /// Gets or sets ClockTime.
         /// </summary>
         public string ClockTime
         {
@@ -47,7 +43,7 @@ namespace Clock_ScreenSaver.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets ClockDate.
         /// </summary>
         public string ClockDate
         {
@@ -59,16 +55,19 @@ namespace Clock_ScreenSaver.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Initializes all members.
         /// </summary>
         private void InitMembers()
         {
             clockTimer = new ClockTimer();
             clockTimer.PropertyChanged += UpdateClockWindow;
+
+            // Sets lock screen is true or false.
+            isLockScreenActive = LockScreenActive.GetLockScreenActive();
         }
 
         /// <summary>
-        /// 
+        /// Updates the clock of the screensaver on the view.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -79,13 +78,19 @@ namespace Clock_ScreenSaver.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Closes the clockView and exits application.
         /// </summary>
         /// <param name="clockView"></param>
         internal void CloseWindow(Views.ClockWindow clockView)
         {
             clockView.Close();
-            Win32API.LockWorkStation();
+
+            // Is the lock screen active then lock display.
+            if(isLockScreenActive)
+            {
+                Win32API.LockWorkStation();
+            }
+            
             Environment.Exit(0);
         }
 

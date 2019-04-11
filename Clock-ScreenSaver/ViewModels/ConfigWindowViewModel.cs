@@ -30,6 +30,7 @@ namespace Clock_ScreenSaver.ViewModels
         private void InitConfigWindowViewModel()
         {
             configRegistryHandler = new ConfigRegistryHandler();
+            ReadConfig();
         }
 
         /// <summary>

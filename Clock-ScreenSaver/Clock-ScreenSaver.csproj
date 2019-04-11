@@ -71,8 +71,10 @@
     <Compile Include="Models\DataModel\RECT.cs" />
     <Compile Include="Models\LogicModel\ClockTimer.cs" />
     <Compile Include="Models\LogicModel\ConfigRegistryHandler.cs" />
+    <Compile Include="Models\LogicModel\LockScreenActive.cs" />
     <Compile Include="Models\LogicModel\Win32API.cs" />
     <Compile Include="Models\DataModel\WindowsStyles.cs" />
+    <Compile Include="Models\LogicModel\RegistryHandler.cs" />
     <Compile Include="ViewModels\ClockWindowViewModel.cs" />
     <Compile Include="ViewModels\ConfigWindowViewModel.cs" />
     <Compile Include="Views\ClockWindow.xaml.cs">
@@ -104,6 +106,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="Resources\Clock-ScreenSaver.scr" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
