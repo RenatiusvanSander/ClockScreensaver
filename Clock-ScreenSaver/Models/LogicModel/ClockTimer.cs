@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Timers;
 
 namespace Clock_ScreenSaver.Models.LogicModel
@@ -12,7 +7,7 @@ namespace Clock_ScreenSaver.Models.LogicModel
     /// <summary>
     /// STores the logic for the clock.
     /// </summary>
-    public class ClockTimer : INotifyPropertyChanged
+    public class ClockTimer : NotifyPropertyChangedBase
     {
 
         // Defines some private varies.
@@ -67,7 +62,7 @@ namespace Clock_ScreenSaver.Models.LogicModel
                 if(time != value)
                 {
                     time = value;
-                    OnPropertyChanged("Time");
+                    OnPropertyChanged();
                 }
             }
             get
@@ -86,24 +81,13 @@ namespace Clock_ScreenSaver.Models.LogicModel
                 if(date != value)
                 {
                     date = value;
-                    OnPropertyChanged("Date");
+                    OnPropertyChanged();
                 }
             }
             get
             {
                 return date;
             }
-        }
-
-        /// <summary>
-        /// refactor this section.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.
-                Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

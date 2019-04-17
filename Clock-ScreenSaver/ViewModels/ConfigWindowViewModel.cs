@@ -1,9 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Clock_ScreenSaver.Models.LogicModel;
 
 namespace Clock_ScreenSaver.ViewModels
@@ -12,7 +7,7 @@ namespace Clock_ScreenSaver.ViewModels
     /// <summary>
     /// Interaction logic for ConfigWindow.
     /// </summary>
-    public class ConfigWindowViewModel : INotifyPropertyChanged
+    public class ConfigWindowViewModel : NotifyPropertyChangedBase
     {
 
         /// <summary>
@@ -36,8 +31,6 @@ namespace Clock_ScreenSaver.ViewModels
         private string screensaverActive;
         private string screensaverScreenLock;
         private string screensaverTimeOut;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         // Properties for the config window.
 
@@ -67,7 +60,7 @@ namespace Clock_ScreenSaver.ViewModels
                         // Writes change to user's registry.
                         screensaverActive = value;
                         WriteConfig();
-                        OnPropertyChanged("ScreensaverActive");
+                        OnPropertyChanged();
                     }
 
                     // Throw an validation error. The textbox gets red coloured
@@ -106,7 +99,7 @@ namespace Clock_ScreenSaver.ViewModels
                     {
                         screensaverScreenLock = value;
                         WriteConfig();
-                        OnPropertyChanged("ScreensaverScreenLock");
+                        OnPropertyChanged();
                     }
 
                     // Throw an validation error. The textbox gets red coloured
@@ -154,7 +147,7 @@ namespace Clock_ScreenSaver.ViewModels
                     {
                         screensaverTimeOut = value;
                         WriteConfig();
-                        OnPropertyChanged("ScreensaverTimeOut");
+                        OnPropertyChanged();
                     }
 
                     // Throw an validation error. The textbox gets red coloured
@@ -206,9 +199,9 @@ namespace Clock_ScreenSaver.ViewModels
             }
 
             // Updates the textboxes on config view.
-            OnPropertyChanged("ScreensaverActive");
-            OnPropertyChanged("ScreensaverScreenLock");
-            OnPropertyChanged("ScreensaverTimeOut");
+            OnPropertyChanged(nameof(ScreensaverActive));
+            OnPropertyChanged(nameof(ScreensaverScreenLock));
+            OnPropertyChanged(nameof(ScreensaverTimeOut));
         }
 
         /// <summary>
@@ -219,16 +212,6 @@ namespace Clock_ScreenSaver.ViewModels
             registryHandler.SaveSettings(screensaverActive.Contains("1") ? true : false,
                 screensaverScreenLock.Contains("1") ? true : false,
                 Convert.ToInt32(screensaverTimeOut), null);
-        }
-
-        /// <summary>
-        /// Satisfies the INotifyPropertyChanged has to be refactored.
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.
-                Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
