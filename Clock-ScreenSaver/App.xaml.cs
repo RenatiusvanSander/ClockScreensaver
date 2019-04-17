@@ -22,10 +22,10 @@ namespace Clock_ScreenSaver
     {
 
         // These are the command line arguments of windows.
-        // s -> start
-        // c -> configure
-        // p -> preview
-        // i -> install screensaver
+        // s -> start.
+        // c -> configure.
+        // p -> preview.
+        // i -> install screensaver.
         private const string S = "/s";
         private const string C = "/c";
         private const string P = "/p";

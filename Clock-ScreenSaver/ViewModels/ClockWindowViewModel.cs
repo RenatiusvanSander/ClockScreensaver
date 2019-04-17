@@ -1,13 +1,6 @@
 ﻿using Clock_ScreenSaver.Models.LogicModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 
 namespace Clock_ScreenSaver.ViewModels
 {
@@ -15,12 +8,10 @@ namespace Clock_ScreenSaver.ViewModels
     /// <summary>
     /// Interaction logic for ClockWindow View.
     /// </summary>
-    public class ClockWindowViewModel : INotifyPropertyChanged
+    public class ClockWindowViewModel : NotifyPropertyChangedBase
     {
         private ClockTimer clockTimer;
         private bool isLockScreenActive;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Ctor.
@@ -73,8 +64,8 @@ namespace Clock_ScreenSaver.ViewModels
         /// <param name="e"></param>
         private void UpdateClockWindow(object sender = null, PropertyChangedEventArgs e = null)
         {
-            OnPropertyChanged("ClockTime");
-            OnPropertyChanged("ClockDate");
+            OnPropertyChanged(nameof(ClockTime));
+            OnPropertyChanged(nameof(ClockDate));
         }
 
         /// <summary>
@@ -92,16 +83,6 @@ namespace Clock_ScreenSaver.ViewModels
             }
             
             Environment.Exit(0);
-        }
-
-        /// <summary>
-        /// Satisfies the INotifyPropertyChanged has to be refactored.
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.
-                Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
