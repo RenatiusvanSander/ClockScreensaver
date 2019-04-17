@@ -12,7 +12,7 @@ namespace Clock_ScreenSaver.Models.LogicModel
     /// </summary>
     public static class LockScreenActive
     {
-        private static RegistryHandler registryHandler;
+        private static RegistryHandler registryHandler = new RegistryHandler();
 
         /// <summary>
         /// Gets the lockscreen is active or not.
@@ -20,7 +20,6 @@ namespace Clock_ScreenSaver.Models.LogicModel
         /// <returns></returns>
         public static bool GetLockScreenActive()
         {
-            registryHandler = new RegistryHandler();
             string[] screensaverSettingsArray = registryHandler.ReadSettings();
 
             // Checks for null and keeps null exceptions away.

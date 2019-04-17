@@ -9,6 +9,51 @@
     <Grid>
         <StackPanel>
             <Label HorizontalAlignment="Center" FontSize="20" FontFamily="Times New Roman" Foreground="Gray">Config Window</Label>
+            <Grid HorizontalAlignment="Left" Height="177" Margin="10,0,0,0" Width="274">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0">1 activates screensaver:</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Height="30" VerticalAlignment="Top">
+                    <TextBox.Text>
+                        <Binding Path="ScreensaverActive" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>                                        
+                </TextBox>
+
+                <Label Grid.Row="1">Lock screen with 1:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Height="30" VerticalAlignment="Top">
+                    <TextBox.Text>
+                        <Binding Path="ScreensaverScreenLock" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <Label Grid.Row="2">Screensaver time out:</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Height="30" VerticalAlignment="Top">
+                    <TextBox.Text>
+                        <Binding Path="ScreensaverTimeOut" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>
