@@ -55,7 +55,6 @@ namespace Clock_ScreenSaver.Models.LogicModel
 
                 // Flushes and closes registry.
                 screensaverRegistryKey.Flush();
-                screensaverRegistryKey.Close();
             }
 
             // Throw exception if an exception is caught.

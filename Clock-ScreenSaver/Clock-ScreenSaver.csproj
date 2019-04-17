@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
@@ -70,7 +71,6 @@
     </Compile>
     <Compile Include="Models\DataModel\RECT.cs" />
     <Compile Include="Models\LogicModel\ClockTimer.cs" />
-    <Compile Include="Models\LogicModel\ConfigRegistryHandler.cs" />
     <Compile Include="Models\LogicModel\LockScreenActive.cs" />
     <Compile Include="Models\LogicModel\Win32API.cs" />
     <Compile Include="Models\DataModel\WindowsStyles.cs" />
