@@ -30,33 +30,40 @@ namespace Clock_ScreenSaver.Models.LogicModel
            int uAction, int uParam, ref int lpvParam,
            int flags);
 
+        // starts a SystemParametersInfo and receives a wished Parameter.
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern bool SystemParametersInfo(
            int uAction, int uParam, ref bool lpvParam,
            int flags);
 
+        // Gets a post message.
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int PostMessage(IntPtr hWnd,
            int wMsg, int wParam, int lParam);
 
+        // Receives IntPtr for an open desktop.
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr OpenDesktop(
            string hDesktop, int Flags, bool Inherit,
            uint DesiredAccess);
 
+        // Closes desktop.
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern bool CloseDesktop(
            IntPtr hDesktop);
 
+        // Return number of windows process.
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern bool EnumDesktopWindows(
            IntPtr hDesktop, EnumDesktopWindowsProc callback,
            IntPtr lParam);
 
+        // Actual window is visible.
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern bool IsWindowVisible(
            IntPtr hWnd);
 
+        // Gets IntPtr of ForegroundWindow.
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetForegroundWindow();
 
@@ -65,11 +72,8 @@ namespace Clock_ScreenSaver.Models.LogicModel
            IntPtr hDesktop, IntPtr lParam);
 
         // Constants
-        private const int SPI_GETSCREENSAVERACTIVE = 16;
         private const int SPI_SETSCREENSAVERACTIVE = 17;
-        private const int SPI_GETSCREENSAVERTIMEOUT = 14;
         private const int SPI_SETSCREENSAVERTIMEOUT = 15;
-        private const int SPI_GETSCREENSAVERRUNNING = 114;
         private const int SPIF_SENDWININICHANGE = 2;
         private const int SPI_SETSCREENSAVESECURE = 119;
 
@@ -77,20 +81,6 @@ namespace Clock_ScreenSaver.Models.LogicModel
         private const uint DESKTOP_WRITEOBJECTS = 0x0080;
         private const uint DESKTOP_READOBJECTS = 0x0001;
         private const int WM_CLOSE = 16;
-        
-        /// <summary>
-        /// Returns TRUE if the screen saver is active 
-        /// (enabled, but not necessarily running).
-        /// </summary>
-        /// <returns>bool</returns>        
-        public static bool GetScreenSaverActive()
-        {
-            bool isActive = false;
-
-            SystemParametersInfo(SPI_GETSCREENSAVERACTIVE, 0,
-               ref isActive, 0);
-            return isActive;
-        }
 
         /// <summary>
         /// Pass in TRUE(1) to activate or FALSE(0) to deactivate
@@ -103,19 +93,6 @@ namespace Clock_ScreenSaver.Models.LogicModel
 
             SystemParametersInfo(SPI_SETSCREENSAVERACTIVE,
                Active, ref nullVar, SPIF_SENDWININICHANGE);
-        }
-
-        /// <summary>
-        /// Returns the screen saver timeout setting, in seconds.
-        /// </summary>
-        /// <returns>Int32</returns>
-        public static Int32 GetScreenSaverTimeout()
-        {
-            Int32 value = 0;
-
-            SystemParametersInfo(SPI_GETSCREENSAVERTIMEOUT, 0,
-               ref value, 0);
-            return value;
         }
 
         /// <summary>
@@ -141,19 +118,6 @@ namespace Clock_ScreenSaver.Models.LogicModel
 
             SystemParametersInfo(SPI_SETSCREENSAVESECURE,
                Value, ref nullVar, SPIF_SENDWININICHANGE);
-        }
-
-        /// <summary>
-        /// Returns TRUE if the screen saver is actually running.
-        /// </summary>
-        /// <returns></returns>
-        public static bool GetScreenSaverRunning()
-        {
-            bool isRunning = false;
-
-            SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, 0,
-               ref isRunning, 0);
-            return isRunning;
         }
 
         // From Microsoft's Knowledge Base article #140723: 
