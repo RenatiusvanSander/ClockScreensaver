@@ -212,6 +212,17 @@ namespace Clock_ScreenSaver.ViewModels
             registryHandler.SaveSettings(screensaverActive.Contains("1") ? true : false,
                 screensaverScreenLock.Contains("1") ? true : false,
                 Convert.ToInt32(screensaverTimeOut), null);
+            ActivateScreensaverSettings();
+        }
+
+        /// <summary>
+        /// Activates changed settings immediateletly.
+        /// </summary>
+        private void ActivateScreensaverSettings()
+        {
+            Win32API.SetScreenSaverSecure(screensaverScreenLock.Contains("1") ? 1 : 0);
+            Win32API.SetScreenSaverActive(screensaverActive.Contains("1") ? 1 : 0);
+            Win32API.SetScreenSaverTimeout(Convert.ToInt32(screensaverTimeOut) * 60);
         }
     }
 }
