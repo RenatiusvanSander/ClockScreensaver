@@ -220,6 +220,11 @@ namespace Clock_ScreenSaver
                 LockScreenActive.GetLockScreenActive(),
                 15,
                 screensaverFilePath);
+
+            // Now update Windows changes to screensaver.exe.
+            Win32API.SetScreenSaverSecure(1);
+            Win32API.SetScreenSaverActive(1);
+            Win32API.SetScreenSaverTimeout(15 * 60);
         }
 
         // <summary>
