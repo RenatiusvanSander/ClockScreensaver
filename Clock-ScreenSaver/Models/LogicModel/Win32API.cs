@@ -15,6 +15,14 @@ namespace Clock_ScreenSaver.Models.LogicModel
     public class Win32API
     {
 
+        // Gets handle for a window for example taskbar handle.
+        [DllImport("user32.dll")]
+        public static extern int FindWindow(string className, string windowText);
+
+        // Enables or disables a window via win32api.
+        [DllImport("user32.dll")]
+        public static extern int ShowWindow(int hwnd, int command);
+
         // Gets the previw window rect size.
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -124,7 +132,6 @@ namespace Clock_ScreenSaver.Models.LogicModel
         // http://support.microsoft.com/kb/140723
         // "How to force a screen saver to close once started 
         // in Windows NT, Windows 2000, and Windows Server 2003"
-
         public static void KillScreenSaver()
         {
             IntPtr hDesktop = OpenDesktop("Screen-saver", 0,
