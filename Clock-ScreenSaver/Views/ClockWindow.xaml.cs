@@ -95,5 +95,25 @@ namespace Clock_ScreenSaver.Views
         {
             clockWindowViewModel.CloseWindow(this);
         }
+
+        /// <summary>
+        /// Unhides taskbar on window closing.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">System.ComponentModel.CancelEventArgs</param>
+        private void ClockWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            TaskbarHideHelper.Show();
+        }
+
+        /// <summary>
+        /// Hides the taskbar after the window is loaded.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">RoutedEventArgs</param>
+        private void ClockWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            TaskbarHideHelper.Hide();
+        }
     }
 }
