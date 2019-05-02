@@ -12,12 +12,29 @@ namespace Clock_ScreenSaver.ViewModels
     {
         private ClockTimer clockTimer;
         private bool isLockScreenActive;
+        private int displayWidth;
+        private int displayHeight;
 
         /// <summary>
         /// Ctor.
         /// </summary>
         public ClockWindowViewModel()
         {
+            InitMembers();
+        }
+
+        /// <summary>
+        /// Ctor for screen resolution of current display.
+        /// </summary>
+        /// <param name="displayWidth">int</param>
+        /// <param name="displayHeight">int</param>
+        public ClockWindowViewModel(int displayWidth, int displayHeight)
+        {
+
+            // Sets the screen resolution.
+            DisplayHeight = displayHeight;
+            DisplayWidth = displayWidth;
+
             InitMembers();
         }
 
@@ -46,6 +63,44 @@ namespace Clock_ScreenSaver.ViewModels
         }
 
         /// <summary>
+        /// Gets the display height for current screen.
+        /// </summary>
+        public int DisplayWidth
+        {
+            set
+            {
+                if(displayWidth != value)
+                {
+                    displayWidth = value;
+                    OnPropertyChanged();
+                }
+            }
+            get
+            {
+                return displayWidth;
+            }
+        }
+
+        /// <summary>
+        /// Gets the display width for current screen;
+        /// </summary>
+        public int DisplayHeight
+        {
+            set
+            {
+                if(displayHeight != value)
+                {
+                    displayHeight = value;
+                    OnPropertyChanged();
+                }
+            }
+            get
+            {
+                return displayHeight;
+            }
+        }
+
+        /// <summary>
         /// Initializes all members.
         /// </summary>
         private void InitMembers()
@@ -60,9 +115,10 @@ namespace Clock_ScreenSaver.ViewModels
         /// <summary>
         /// Updates the clock of the screensaver on the view.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateClockWindow(object sender = null, PropertyChangedEventArgs e = null)
+        /// <param name="sender">object</param>
+        /// <param name="e">PropertyChangedEventArgs</param>
+        private void UpdateClockWindow(object sender = null,
+            PropertyChangedEventArgs e = null)
         {
             OnPropertyChanged(nameof(ClockTime));
             OnPropertyChanged(nameof(ClockDate));
@@ -71,7 +127,7 @@ namespace Clock_ScreenSaver.ViewModels
         /// <summary>
         /// Closes the clockView and exits application.
         /// </summary>
-        /// <param name="clockView"></param>
+        /// <param name="clockView">ClockWindow</param>
         internal void CloseWindow(Views.ClockWindow clockView)
         {
             clockView.Close();

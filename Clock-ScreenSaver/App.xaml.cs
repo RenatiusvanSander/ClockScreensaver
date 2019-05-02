@@ -105,42 +105,43 @@ namespace Clock_ScreenSaver
         /// </summary>
         private void ShowScreenSaver()
         {
-            Window ownerWindow = null;
+            ClockWindow ownerWindow = null;
 
-            // Starts same clock on all monitors.
-            foreach (Screen screen in Screen.AllScreens)
+            // Creates window on other screens.
+            foreach (System.Windows.Forms.Screen screen in System.Windows.Forms.Screen.AllScreens)
             {
-                ClockWindow clockWindow = new ClockWindow();
+                ClockWindow window = new ClockWindow();
 
-                // Sets Windows Properties.
-                clockWindow.WindowStyle = WindowStyle.None;
-
-                // Creates the primary window.
-                if (!screen.Primary)
+                // Primary screen does not have WindowsStartupLocation.
+                if (screen.Primary)
                 {
 
-                    // Positions other windows on other screens.
-                    clockWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-                    clockWindow.Top = screen.WorkingArea.Top;
-                    clockWindow.Left = screen.WorkingArea.Left;
+                    // Maximizes screen.
+                    window.WindowState = WindowState.Maximized;
+
+                    ownerWindow = window;
                 }
                 else
                 {
 
-                    // Changes owner of not primary screens.
-                    ownerWindow = clockWindow;
+                    // Other screens need a WindowStartupLocation on manual.
+                    window.WindowStartupLocation = WindowStartupLocation.Manual;
+
+                    System.Drawing.Rectangle location = screen.Bounds;
+                    window.Top = location.Top;
+                    window.Left = location.Left - 480;
+                    window.Width = location.Width;
+                    window.Height = location.Height;
                 }
 
-                clockWindow.Show();
+                window.Show();
             }
 
-            // Sets window on primary screen as owner to close every window
-            // on closing.
-            foreach (Window window in Windows)
+            // Sets every other screen owned to prmary window.
+            // It closes all windows at once.
+            foreach(Window window in Current.Windows)
             {
-
-                // Sets primary window as owner of windows on other screens.
-                if (window.Owner != ownerWindow?.Owner)
+                if(window != ownerWindow)
                 {
                     window.Owner = ownerWindow;
                 }
@@ -191,7 +192,7 @@ namespace Clock_ScreenSaver
         /// </summary>
         private void InstallScreensaver()
         {
-            string appDataPath =Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string screensaverFilePath = Path.Combine(appDataPath, SCR_FILE_NAME);
             string[] fileNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
 
