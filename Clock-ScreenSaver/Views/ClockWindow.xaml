@@ -6,17 +6,33 @@
         xmlns:local="clr-namespace:Clock_ScreenSaver.Views"
         mc:Ignorable="d"
         Title="ClockWindow"
-        Height="300"
-        Width="300"
+        Height="{Binding DisplayHeight}"
+        Width="{Binding DisplayWidth}"
         AllowsTransparency="True"
-        Background="Transparent"
-        Loaded="ClockWindow_Loaded" Cursor="No" ShowInTaskbar="False" KeyDown="ClockWindow_KeyDown" MouseMove="ClockWindow_MouseMove" MouseDown="ClockWindow_MouseDown">
+        Background="Black"
+        Cursor="No"
+        ShowInTaskbar="False"
+        KeyDown="ClockWindow_KeyDown"
+        MouseMove="ClockWindow_MouseMove"
+        MouseDown="ClockWindow_MouseDown"
+        WindowStyle="None"
+        ResizeMode="NoResize">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="300"></WindowChrome>
     </WindowChrome.WindowChrome>
-    
-    <Border CornerRadius="360" BorderBrush="#FFDF66" BorderThickness="5" Background="#2D2D30" Name="border1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+    <Border Grid.Row="1" Grid.Column="1" CornerRadius="360" BorderBrush="#FFDF66" BorderThickness="5" Background="#2D2D30" Name="border1">
         <StackPanel WindowChrome.IsHitTestVisibleInChrome="True">
             <Label Foreground="#FFDF66" Margin="0,15,0,0" FontSize="25" FontFamily="Arial" HorizontalAlignment="Center">DIGICLOCK</Label>
 
@@ -33,4 +49,5 @@
             </Button>
         </StackPanel>
     </Border>
+    </Grid>
 </Window>

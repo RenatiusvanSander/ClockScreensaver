@@ -5,6 +5,7 @@ using System.Windows.Input;
 
 namespace Clock_ScreenSaver.Views
 {
+
     /// <summary>
     /// Interaktionslogik für ClockWindow.xaml
     /// </summary>
@@ -28,13 +29,14 @@ namespace Clock_ScreenSaver.Views
         }
 
         /// <summary>
-        /// Maybe there will be things loaded after the clock window is loaded.
+        /// Ctor for DisplayResolution.
         /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">RoutedEventArgs</param>
-        private void ClockWindow_Loaded(object sender, RoutedEventArgs e)
+        public ClockWindow(int displayWidth, int displayHeight)
         {
-
+            InitializeComponent();
+            clockWindowViewModel = 
+                new ClockWindowViewModel(displayWidth, displayHeight);
+            DataContext = clockWindowViewModel;
         }
 
         /// <summary>
@@ -52,7 +54,8 @@ namespace Clock_ScreenSaver.Views
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">KeyEventArgs</param>
-        private void ClockWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void ClockWindow_KeyDown(object sender,
+            System.Windows.Input.KeyEventArgs e)
         {
             clockWindowViewModel.CloseWindow(this);
         }
@@ -62,20 +65,21 @@ namespace Clock_ScreenSaver.Views
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">MouseEventArgs</param>
-        private void ClockWindow_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ClockWindow_MouseMove(object sender,
+            System.Windows.Input.MouseEventArgs e)
         {
 
-            //see if originallocation has been set
+            // See if originallocation has been set.
             if (OriginalLocation.X == int.MaxValue &
                 OriginalLocation.Y == int.MaxValue)
             {
                 OriginalLocation = e.GetPosition((Window)sender);
             }
 
-            //see if the mouse has moved more than 20 pixels 
-            //in any direction. If it has, close the application.
-            if (Math.Abs(e.GetPosition((Window)sender).X - OriginalLocation.X) > 20 |
-                Math.Abs(e.GetPosition((Window)sender).Y - OriginalLocation.Y) > 20)
+            // see if the mouse has moved more than 0.01 pixels.
+            // in any direction. If it has, close the application.
+            if (Math.Abs(e.GetPosition((Window)sender).X - OriginalLocation.X) > 0.01 |
+                Math.Abs(e.GetPosition((Window)sender).Y - OriginalLocation.Y) > 0.01)
             {
                 clockWindowViewModel.CloseWindow(this);
             }
@@ -86,7 +90,8 @@ namespace Clock_ScreenSaver.Views
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">MouseButtonEventArgs</param>
-        private void ClockWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ClockWindow_MouseDown(object sender,
+            MouseButtonEventArgs e)
         {
             clockWindowViewModel.CloseWindow(this);
         }
