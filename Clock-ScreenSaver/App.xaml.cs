@@ -11,6 +11,7 @@ using Clock_ScreenSaver.Models.LogicModel;
 using Clock_ScreenSaver.Models.DataModel;
 using System.IO;
 using System.Reflection;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Clock_ScreenSaver
 {
@@ -110,7 +111,8 @@ namespace Clock_ScreenSaver
             // Creates window on other screens.
             foreach (System.Windows.Forms.Screen screen in System.Windows.Forms.Screen.AllScreens)
             {
-                ClockWindow window = new ClockWindow();
+                ClockWindow window = new ClockWindow(screen.Bounds.Width,
+                    screen.Bounds.Height);
 
                 // Primary screen does not have WindowsStartupLocation.
                 if (screen.Primary)
@@ -155,15 +157,16 @@ namespace Clock_ScreenSaver
         /// <param name="e">StartupEventArgs</param>
         private void PreviewScreensaver(StartupEventArgs e)
         {
-            previewClockWindow = new ClockWindow();
+            previewClockWindow = new ClockWindow(100, 100);
             Int32 previewHandle = Convert.ToInt32(e.Args[1]);
             IntPtr pPreviewHnd = new IntPtr(previewHandle);
 
             // Receives window size via RECT and Win32API.
             RECT lpRect = new RECT();
-            bool bGetRect = Win32API.GetClientRect(pPreviewHnd, ref lpRect);
+            Win32API.GetClientRect(pPreviewHnd, ref lpRect);
 
-            HwndSourceParameters sourceParams = new HwndSourceParameters("sourceParams");
+            HwndSourceParameters sourceParams =
+                new HwndSourceParameters("sourceParams");
 
             // Defines source parameters.
             sourceParams.PositionX = 0;
@@ -171,12 +174,14 @@ namespace Clock_ScreenSaver
             sourceParams.Height = lpRect.Bottom - lpRect.Top;
             sourceParams.Width = lpRect.Right - lpRect.Left;
             sourceParams.ParentWindow = pPreviewHnd;
-            sourceParams.WindowStyle = (int)(WindowStyles.WS_VISIBLE | WindowStyles.WS_CHILD | WindowStyles.WS_CLIPCHILDREN);
+            sourceParams.WindowStyle = (int)(WindowStyles.WS_VISIBLE
+                | WindowStyles.WS_CHILD | 
+                WindowStyles.WS_CLIPCHILDREN);
 
             // Transmits pcitures to screensaver window of windows.
             winWPFContent = new HwndSource(sourceParams);
             winWPFContent.Disposed += new EventHandler(WinWPFContent_Disposed);
-            winWPFContent.RootVisual = previewClockWindow.border1;
+            winWPFContent.RootVisual = previewClockWindow.WindowGrid;
         }
 
         /// <summary>

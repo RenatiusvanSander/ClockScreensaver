@@ -23,7 +23,7 @@
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="300"></WindowChrome>
     </WindowChrome.WindowChrome>
-    <Grid>
+    <Grid Name="WindowGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="300"/>
@@ -34,7 +34,7 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-    <Border Grid.Row="1" Grid.Column="1" CornerRadius="360" BorderBrush="#FFDF66" BorderThickness="5" Background="#2D2D30" Name="border1">
+    <Border Grid.Row="1" Grid.Column="1" CornerRadius="360" BorderBrush="#FFDF66" BorderThickness="5" Background="#2D2D30">
         <StackPanel WindowChrome.IsHitTestVisibleInChrome="True">
             <Label Foreground="#FFDF66" Margin="0,15,0,0" FontSize="25" FontFamily="Arial" HorizontalAlignment="Center">DIGICLOCK</Label>
 
