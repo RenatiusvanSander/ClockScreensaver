@@ -79,6 +79,7 @@
     <Compile Include="Models\LogicModel\Win32API.cs" />
     <Compile Include="Models\DataModel\WindowsStyles.cs" />
     <Compile Include="Models\LogicModel\RegistryHandler.cs" />
+    <Compile Include="ViewModels\PreviewWindowViewModel.cs" />
     <Compile Include="ViewModels\ClockWindowViewModel.cs" />
     <Compile Include="ViewModels\ConfigWindowViewModel.cs" />
     <Compile Include="Views\ClockWindow.xaml.cs">
@@ -86,6 +87,9 @@
     </Compile>
     <Compile Include="Views\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PreviewWindow.xaml.cs">
+      <DependentUpon>PreviewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TaskbarHideHelper.cs" />
   </ItemGroup>
@@ -111,9 +115,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="Resources\Clock-ScreenSaver.scr">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Clock-ScreenSaver.scr" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -127,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PreviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

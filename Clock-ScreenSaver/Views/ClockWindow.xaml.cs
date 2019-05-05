@@ -1,7 +1,10 @@
-﻿using Clock_ScreenSaver.ViewModels;
+﻿using Clock_ScreenSaver.Models.LogicModel;
+using Clock_ScreenSaver.ViewModels;
 using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace Clock_ScreenSaver.Views
 {
@@ -16,7 +19,7 @@ namespace Clock_ScreenSaver.Views
         //start off OriginalLoction with an X and Y of int.MaxValue, because
         //it is impossible for the cursor to be at that position. That way, we
         //know if this variable has been set yet.
-        Point OriginalLocation = new Point(int.MaxValue, int.MaxValue);
+        private Point OriginalLocation = new Point(int.MaxValue, int.MaxValue);
 
         /// <summary>
         /// Ctor.
@@ -34,7 +37,7 @@ namespace Clock_ScreenSaver.Views
         public ClockWindow(int displayWidth, int displayHeight)
         {
             InitializeComponent();
-            clockWindowViewModel = 
+            clockWindowViewModel =
                 new ClockWindowViewModel(displayWidth, displayHeight);
             DataContext = clockWindowViewModel;
         }
