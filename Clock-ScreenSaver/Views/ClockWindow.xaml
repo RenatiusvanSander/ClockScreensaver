@@ -20,9 +20,6 @@
         WindowStyle="None"
         ResizeMode="NoResize">
 
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="300"></WindowChrome>
-    </WindowChrome.WindowChrome>
     <Grid Name="WindowGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -35,7 +32,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
     <Border Grid.Row="1" Grid.Column="1" CornerRadius="360" BorderBrush="#FFDF66" BorderThickness="5" Background="#2D2D30">
-        <StackPanel WindowChrome.IsHitTestVisibleInChrome="True">
+        <StackPanel>
             <Label Foreground="#FFDF66" Margin="0,15,0,0" FontSize="25" FontFamily="Arial" HorizontalAlignment="Center">DIGICLOCK</Label>
 
             <StackPanel Background="#3F3F46" Margin="0,20,0,5" Width="280" Height="100">
