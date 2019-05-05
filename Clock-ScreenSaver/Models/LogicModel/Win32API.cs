@@ -15,9 +15,25 @@ namespace Clock_ScreenSaver.Models.LogicModel
     public class Win32API
     {
 
+        // Sets parents window handle in a child.
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetParent(IntPtr hWndChild,
+            IntPtr hWndNewParent);
+
+        // Sets long of window.
+        [DllImport("user32.dll")]
+        public static extern int SetWindowLong(IntPtr hWnd,
+            int nIndex,
+            IntPtr dwNewLong);
+
+        // Gets the windows long for example of a parent window.
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
         // Gets handle for a window for example taskbar handle.
         [DllImport("user32.dll")]
-        public static extern int FindWindow(string className, string windowText);
+        public static extern int FindWindow(string className,
+            string windowText);
 
         // Enables or disables a window via win32api.
         [DllImport("user32.dll")]
