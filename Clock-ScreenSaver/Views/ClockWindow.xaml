@@ -10,7 +10,7 @@
         Width="{Binding DisplayWidth}"
         AllowsTransparency="True"
         Background="Black"
-        Cursor="No"
+        Cursor="None"
         ShowInTaskbar="False"
         KeyDown="ClockWindow_KeyDown"
         MouseMove="ClockWindow_MouseMove"
