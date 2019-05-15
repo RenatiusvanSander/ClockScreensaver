@@ -38,6 +38,7 @@ namespace Clock_ScreenSaver
         private HwndSource winWPFContent;
         private PreviewWindow previewClockWindow;
 
+        // Provides reading and writing to user's registry.
         private RegistryHandler registryHandler;
 
         /// <summary>
@@ -187,7 +188,6 @@ namespace Clock_ScreenSaver
             winWPFContent.Disposed += new EventHandler(WinWPFContent_Disposed);
             winWPFContent.RootVisual = previewClockWindow.clockBorder;
 
-            previewClockWindow.Topmost = false;
             previewClockWindow.Show();
         }
 
