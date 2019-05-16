@@ -5,55 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clock_ScreenSaver.Views"
         mc:Ignorable="d"
-        Title="Configuration" Height="300" Width="300">
-    <Grid>
-        <StackPanel>
-            <Label HorizontalAlignment="Center" FontSize="20" FontFamily="Times New Roman" Foreground="Gray">Config Window</Label>
-            <Grid HorizontalAlignment="Left" Height="177" Margin="10,0,0,0" Width="274">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
+        Title="Config Clock-Saver"
+        Height="195"
+        Width="300">
+    <Grid HorizontalAlignment="Left" Margin="10,10,0,30.6" Width="274">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
 
-                <Label Grid.Row="0">1 activates screensaver:</Label>
-                <TextBox Grid.Row="0" Grid.Column="1" Height="30" VerticalAlignment="Top">
-                    <TextBox.Text>
-                        <Binding Path="ScreensaverActive" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <ExceptionValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>                                        
-                </TextBox>
+        <CheckBox Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" IsChecked="{Binding IsScreensaverActiveChecked}">
+            <TextBlock>
+                Screensaver is active
+            </TextBlock>
+        </CheckBox>
 
-                <Label Grid.Row="1">Lock screen with 1:</Label>
-                <TextBox Grid.Row="1" Grid.Column="1" Height="30" VerticalAlignment="Top">
-                    <TextBox.Text>
-                        <Binding Path="ScreensaverScreenLock" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <ExceptionValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+        <CheckBox Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" IsChecked="{Binding IsScreensaverScreenLockChecked}">
+            <TextBlock>
+                Shows lock screen on screensaver exit
+            </TextBlock>
+        </CheckBox>
 
-                <Label Grid.Row="2">Screensaver time out:</Label>
-                <TextBox Grid.Row="2" Grid.Column="1" Height="30" VerticalAlignment="Top">
-                    <TextBox.Text>
-                        <Binding Path="ScreensaverTimeOut" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <ExceptionValidationRule />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+        <Label Grid.Row="2" Grid.Column="0" Content="saver time out (in minutes)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="55,7.4,0,7.4"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Height="22" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center">
+            <TextBox.Text>
+                <Binding Path="ScreensaverTimeOut" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-            </Grid>
-        </StackPanel>
     </Grid>
 </Window>
