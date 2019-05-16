@@ -1,10 +1,7 @@
-﻿using Clock_ScreenSaver.Models.LogicModel;
-using Clock_ScreenSaver.ViewModels;
+﻿using Clock_ScreenSaver.ViewModels;
 using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interop;
 
 namespace Clock_ScreenSaver.Views
 {
@@ -16,10 +13,10 @@ namespace Clock_ScreenSaver.Views
     {
         private ClockWindowViewModel clockWindowViewModel;
 
-        //start off OriginalLoction with an X and Y of int.MaxValue, because
-        //it is impossible for the cursor to be at that position. That way, we
-        //know if this variable has been set yet.
-        private Point OriginalLocation = new Point(int.MaxValue, int.MaxValue);
+        // Starts off originaloction with an X and Y of int.MaxValue, because
+        // it is impossible for the cursor to be at that position. That way, we
+        // know if this variable has been set yet.
+        private Point originalLocation = new Point(int.MaxValue, int.MaxValue);
 
         /// <summary>
         /// Ctor.
@@ -73,16 +70,16 @@ namespace Clock_ScreenSaver.Views
         {
 
             // See if originallocation has been set.
-            if (OriginalLocation.X == int.MaxValue &
-                OriginalLocation.Y == int.MaxValue)
+            if (originalLocation.X == int.MaxValue &
+                originalLocation.Y == int.MaxValue)
             {
-                OriginalLocation = e.GetPosition((Window)sender);
+                originalLocation = e.GetPosition((Window)sender);
             }
 
             // see if the mouse has moved more than 0.01 pixels.
             // in any direction. If it has, close the application.
-            if (Math.Abs(e.GetPosition((Window)sender).X - OriginalLocation.X) > 0.01 |
-                Math.Abs(e.GetPosition((Window)sender).Y - OriginalLocation.Y) > 0.01)
+            if (Math.Abs(e.GetPosition((Window)sender).X - originalLocation.X) > 0.01 |
+                Math.Abs(e.GetPosition((Window)sender).Y - originalLocation.Y) > 0.01)
             {
                 clockWindowViewModel.CloseWindow(this);
             }
@@ -104,7 +101,8 @@ namespace Clock_ScreenSaver.Views
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">System.ComponentModel.CancelEventArgs</param>
-        private void ClockWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ClockWindowClosing(object sender,
+            System.ComponentModel.CancelEventArgs e)
         {
             TaskbarHideHelper.Show();
         }

@@ -1,7 +1,6 @@
 ﻿using Clock_ScreenSaver.Views;
 using System;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Interop;
 
 // Here you will find Win32API.
@@ -11,7 +10,6 @@ using Clock_ScreenSaver.Models.LogicModel;
 using Clock_ScreenSaver.Models.DataModel;
 using System.IO;
 using System.Reflection;
-using MessageBox = System.Windows.MessageBox;
 
 namespace Clock_ScreenSaver
 {
@@ -171,19 +169,21 @@ namespace Clock_ScreenSaver
                 new PreviewWindow(lpRect.Right, lpRect.Bottom, previewHandle);
 
             HwndSourceParameters sourceParams =
-                new HwndSourceParameters("sourceParams");
+                new HwndSourceParameters("sourceParams")
+                {
 
-            // Defines source parameters.
-            sourceParams.PositionX = 0;
-            sourceParams.PositionY = 0;
-            sourceParams.Height = lpRect.Bottom - lpRect.Top;
-            sourceParams.Width = lpRect.Right - lpRect.Left;
-            sourceParams.ParentWindow = previewHandle;
-            sourceParams.WindowStyle = (int)(WindowStyles.WS_VISIBLE
+                    // Defines source parameters.
+                    PositionX = 0,
+                    PositionY = 0,
+                    Height = lpRect.Bottom - lpRect.Top,
+                    Width = lpRect.Right - lpRect.Left,
+                    ParentWindow = previewHandle,
+                    WindowStyle = (int)(WindowStyles.WS_VISIBLE
                 | WindowStyles.WS_CHILD |
-                WindowStyles.WS_CLIPCHILDREN);
+                WindowStyles.WS_CLIPCHILDREN)
+                };
 
-            // Transmits pcitures to screensaver window of windows.
+            // Transmits pictures to screensaver window of windows.
             winWPFContent = new HwndSource(sourceParams);
             winWPFContent.Disposed += new EventHandler(WinWPFContent_Disposed);
             winWPFContent.RootVisual = previewClockWindow.clockBorder;

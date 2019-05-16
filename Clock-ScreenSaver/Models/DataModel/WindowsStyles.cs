@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Clock_ScreenSaver.Models.DataModel
+﻿namespace Clock_ScreenSaver.Models.DataModel
 {
 
     /// <summary>
@@ -22,7 +16,7 @@ namespace Clock_ScreenSaver.Models.DataModel
         public const uint WS_CLIPCHILDREN = 0x02000000;
         public const uint WS_MAXIMIZE = 0x01000000;
         public const uint WS_CAPTION = 0x00C00000;
-        
+
         /* WS_BORDER | WS_DLGFRAME  */
         public const uint WS_BORDER = 0x00800000;
         public const uint WS_DLGFRAME = 0x00400000;
@@ -57,15 +51,14 @@ namespace Clock_ScreenSaver.Models.DataModel
 
         public const uint WS_CHILDWINDOW = WS_CHILD;
 
-        //Extended Window Styles
-
+        // Extended Window Styles.
         public const uint WS_EX_DLGMODALFRAME = 0x00000001;
         public const uint WS_EX_NOPARENTNOTIFY = 0x00000004;
         public const uint WS_EX_TOPMOST = 0x00000008;
         public const uint WS_EX_ACCEPTFILES = 0x00000010;
         public const uint WS_EX_TRANSPARENT = 0x00000020;
 
-        //#if(WINVER >= 0x0400)
+        // #if(WINVER >= 0x0400)
         public const uint WS_EX_MDICHILD = 0x00000040;
         public const uint WS_EX_TOOLWINDOW = 0x00000080;
         public const uint WS_EX_WINDOWEDGE = 0x00000100;
@@ -83,22 +76,20 @@ namespace Clock_ScreenSaver.Models.DataModel
         public const uint WS_EX_STATICEDGE = 0x00020000;
         public const uint WS_EX_APPWINDOW = 0x00040000;
 
-        public const uint WS_EX_OVERLAPPEDWINDOW = (WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE);
-        public const uint WS_EX_PALETTEWINDOW = (WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST);
-        // #endif /* WINVER >= 0x0400 */
-
-        // #if(_WIN32_WINNT >= 0x0500)
+        public const uint WS_EX_OVERLAPPEDWINDOW = (WS_EX_WINDOWEDGE |
+            WS_EX_CLIENTEDGE);
+        public const uint WS_EX_PALETTEWINDOW = (WS_EX_WINDOWEDGE |
+            WS_EX_TOOLWINDOW | WS_EX_TOPMOST);
         public const uint WS_EX_LAYERED = 0x00080000;
-        // #endif /* _WIN32_WINNT >= 0x0500 */
 
-        // #if(WINVER >= 0x0500)
-        public const uint WS_EX_NOINHERITLAYOUT = 0x00100000; // Disable inheritence of mirroring by children
-        public const uint WS_EX_LAYOUTRTL = 0x00400000; // Right to left mirroring
-        // #endif /* WINVER >= 0x0500 */
+        // Disable inheritence of mirroring by children.
+        public const uint WS_EX_NOINHERITLAYOUT = 0x00100000;
 
-        // #if(_WIN32_WINNT >= 0x0500)
+        // Right to left mirroring.
+        public const uint WS_EX_LAYOUTRTL = 0x00400000;
+
+        // For Win32 Systems.
         public const uint WS_EX_COMPOSITED = 0x02000000;
         public const uint WS_EX_NOACTIVATE = 0x08000000;
-        // #endif /* _WIN32_WINNT >= 0x0500 */
     }
 }
