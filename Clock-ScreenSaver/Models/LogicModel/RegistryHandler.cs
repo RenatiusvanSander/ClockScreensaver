@@ -14,26 +14,34 @@ namespace Clock_ScreenSaver.Models.LogicModel
 
         // Defines some static string varies for registry keys. SCR shorts
         // Screensaver.
-        private const string STRING_REGISTRY_USER_SCREENSAVER_PATH = "Control Panel\\Desktop";
+        private const string STRING_REGISTRY_USER_SCREENSAVER_PATH =
+            "Control Panel\\Desktop";
         private const string SCR_ACTIVE = "ScreenSaveActive";
         private const string SCR_LOCKSCREEN_IS_ACTIVE = "ScreenSaverIsSecure";
         private const string SCR_TIME_OUT = "ScreenSaveTimeOut";
         private const string SCR_FULL_PATH = "SCRNSAVE.EXE";
 
+        // Opens and store user' registry key until application exits.
         private RegistryKey screensaverRegistryKey;
 
+        /// <summary>
+        /// Ctor.
+        /// </summary>
         public RegistryHandler()
         {
 
-            // ToDo refactor.
-            screensaverRegistryKey = Registry.CurrentUser.OpenSubKey(STRING_REGISTRY_USER_SCREENSAVER_PATH, true);
+            screensaverRegistryKey = Registry.CurrentUser.
+                OpenSubKey(STRING_REGISTRY_USER_SCREENSAVER_PATH, true);
         }
 
         /// <summary>
         /// Saves changes to screensaver keys in user's registry.
         /// </summary>
         /// <returns>bool</returns>
-        public bool SaveSettings(bool active, bool isSecure, int intTimeOut, string scrFullPath)
+        public bool SaveSettings(bool active,
+            bool isSecure,
+            int intTimeOut,
+            string scrFullPath)
         {
 
             // Tries to save values.
@@ -43,17 +51,23 @@ namespace Clock_ScreenSaver.Models.LogicModel
                 intTimeOut *= 60;
 
                 // Sets each value for subkey.
-                screensaverRegistryKey.SetValue(SCR_ACTIVE, active ? 1 : 0, RegistryValueKind.DWord);
-                screensaverRegistryKey.SetValue(SCR_LOCKSCREEN_IS_ACTIVE, isSecure ? 1 : 0, RegistryValueKind.DWord);
-                screensaverRegistryKey.SetValue(SCR_TIME_OUT, intTimeOut, RegistryValueKind.DWord);
+                screensaverRegistryKey.SetValue(SCR_ACTIVE, active ?
+                    1 : 0, RegistryValueKind.DWord);
+                screensaverRegistryKey.SetValue(SCR_LOCKSCREEN_IS_ACTIVE,
+                    isSecure ? 1 : 0, RegistryValueKind.DWord);
+                screensaverRegistryKey.SetValue(SCR_TIME_OUT,
+                    intTimeOut,
+                    RegistryValueKind.DWord);
 
                 // Writes last value, if this is not null or empty.
                 if(!string.IsNullOrEmpty(scrFullPath))
                 {
-                    screensaverRegistryKey.SetValue(SCR_FULL_PATH, scrFullPath, RegistryValueKind.String);
+                    screensaverRegistryKey.SetValue(SCR_FULL_PATH,
+                        scrFullPath,
+                        RegistryValueKind.String);
                 }
 
-                // Flushes and closes registry.
+                // Flushes registry.
                 screensaverRegistryKey.Flush();
             }
 
@@ -96,7 +110,7 @@ namespace Clock_ScreenSaver.Models.LogicModel
             // If this fails an exception is thrown.
             catch(Exception e)
             {
-                throw new Exception("NullReferenceException happened", e);
+                throw new Exception("NullReferenceException happened. ", e);
             }
             
             return stringSettingsArray;
@@ -109,9 +123,8 @@ namespace Clock_ScreenSaver.Models.LogicModel
         /// <returns>string</returns>
         private string Read(string keyName)
         {
-            var readValue = screensaverRegistryKey?.GetValue(keyName)?.ToString() ?? null;
-
-            return readValue;
+            return screensaverRegistryKey?.GetValue(keyName)?.ToString() ??
+                null;
         }
     }
 }

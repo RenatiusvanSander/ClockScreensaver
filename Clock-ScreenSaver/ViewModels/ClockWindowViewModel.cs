@@ -120,6 +120,8 @@ namespace Clock_ScreenSaver.ViewModels
         private void UpdateClockWindow(object sender = null,
             PropertyChangedEventArgs e = null)
         {
+
+            // Updates prperties.
             OnPropertyChanged(nameof(ClockTime));
             OnPropertyChanged(nameof(ClockDate));
         }
@@ -138,6 +140,7 @@ namespace Clock_ScreenSaver.ViewModels
                 Win32API.LockWorkStation();
             }
             
+            // Exits without an error.
             Environment.Exit(0);
         }
     }

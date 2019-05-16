@@ -8,8 +8,9 @@
         Title="PreviewWindow"
         Height="90"
         Width="110"
+        Topmost="False"
         Background="Black"
-        Cursor="No"
+        Visibility="Hidden"
         ShowInTaskbar="False"
         WindowStyle="None">
     <Border CornerRadius="75" BorderBrush="#FFDF66" BorderThickness="3" Background="#2D2D30" Name="clockBorder" HorizontalAlignment="Left" VerticalAlignment="Top">

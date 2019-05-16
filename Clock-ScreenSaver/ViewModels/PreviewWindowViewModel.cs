@@ -1,6 +1,4 @@
 ﻿using Clock_ScreenSaver.Models.LogicModel;
-using Clock_ScreenSaver.Views;
-using System;
 using System.ComponentModel;
 
 namespace Clock_ScreenSaver.ViewModels
