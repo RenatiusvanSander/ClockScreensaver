@@ -7,7 +7,7 @@ namespace Clock_ScreenSaver.Views
 {
 
     /// <summary>
-    /// Interaktionslogik für ClockWindow.xaml
+    /// Interactionslogic for ClockWindow.xaml
     /// </summary>
     public partial class ClockWindow : Window
     {
@@ -40,16 +40,6 @@ namespace Clock_ScreenSaver.Views
         }
 
         /// <summary>
-        /// Exits on Button Click.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">RoutedEventArgs</param>
-        private void QuitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            clockWindowViewModel.CloseWindow(this);
-        }
-
-        /// <summary>
         /// Exits on KeyDown.
         /// </summary>
         /// <param name="sender">object</param>
@@ -68,7 +58,7 @@ namespace Clock_ScreenSaver.Views
         private void ClockWindow_MouseMove(object sender,
             System.Windows.Input.MouseEventArgs e)
         {
-
+            
             // See if originallocation has been set.
             if (originalLocation.X == int.MaxValue &
                 originalLocation.Y == int.MaxValue)

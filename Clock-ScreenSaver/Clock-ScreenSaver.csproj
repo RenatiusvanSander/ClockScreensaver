@@ -75,6 +75,7 @@
     <Compile Include="ViewModels\PreviewWindowViewModel.cs" />
     <Compile Include="ViewModels\ClockWindowViewModel.cs" />
     <Compile Include="ViewModels\ConfigWindowViewModel.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="Views\ClockWindow.xaml.cs">
       <DependentUpon>ClockWindow.xaml</DependentUpon>
     </Compile>

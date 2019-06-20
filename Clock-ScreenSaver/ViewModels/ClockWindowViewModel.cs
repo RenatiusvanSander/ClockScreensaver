@@ -1,4 +1,5 @@
 ﻿using Clock_ScreenSaver.Models.LogicModel;
+using Clock_ScreenSaver.Views;
 using System;
 
 namespace Clock_ScreenSaver.ViewModels
@@ -13,6 +14,9 @@ namespace Clock_ScreenSaver.ViewModels
         private bool isLockScreenActive;
         private int displayWidth;
         private int displayHeight;
+
+        private RelayCommand quit;
+        private ClockWindow clockWindow;
 
         /// <summary>
         /// Ctor.
@@ -35,6 +39,21 @@ namespace Clock_ScreenSaver.ViewModels
             DisplayWidth = displayWidth;
 
             InitMembers();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RelayCommand Quit
+        {
+            get
+            {
+                return quit;
+            }
+            private set
+            {
+                quit = value;
+            }
         }
 
         /// <summary>
@@ -68,7 +87,7 @@ namespace Clock_ScreenSaver.ViewModels
         {
             set
             {
-                if(displayWidth != value)
+                if (displayWidth != value)
                 {
                     displayWidth = value;
                     OnPropertyChanged();
@@ -87,7 +106,7 @@ namespace Clock_ScreenSaver.ViewModels
         {
             set
             {
-                if(displayHeight != value)
+                if (displayHeight != value)
                 {
                     displayHeight = value;
                     OnPropertyChanged();
@@ -106,6 +125,10 @@ namespace Clock_ScreenSaver.ViewModels
         {
             clockTimer = new ClockTimer();
             clockTimer.ClockTimerElapsed += UpdateClockWindow;
+
+            // Sets the quit;
+            Quit = new RelayCommand(
+                lambda => { ExitApplication(); }, lambda => true);
 
             // Sets lock screen is true or false.
             isLockScreenActive = LockScreenActive.GetLockScreenActive();
@@ -129,16 +152,24 @@ namespace Clock_ScreenSaver.ViewModels
         /// Closes the clockView and exits application.
         /// </summary>
         /// <param name="clockView">ClockWindow</param>
-        internal void CloseWindow(Views.ClockWindow clockView)
+        public void CloseWindow(ClockWindow clockView)
         {
             clockView.Close();
 
             // Is the lock screen active then lock display.
-            if(isLockScreenActive)
+            if (isLockScreenActive)
             {
                 Win32API.LockWorkStation();
             }
-            
+
+            ExitApplication();
+        }
+
+        /// <summary>
+        /// Exits application.
+        /// </summary>
+        private void ExitApplication()
+        {
             // Exits without an error.
             Environment.Exit(0);
         }

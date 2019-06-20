@@ -43,7 +43,7 @@
                 <Label Content="{Binding ClockDate}"  Name="datelbl" Margin="0,8,0,0" Foreground="#FFDF66" FontSize="20" FontFamily="Arial" HorizontalAlignment="Center"></Label>
             </StackPanel>
 
-            <Button Width="60" Padding="5,5,5,5" Background="#FFDF66" FontSize="10" FontFamily="Arial" Foreground="#333333" BorderThickness="0" Name="QuitBtn" Click="QuitBtn_Click">
+            <Button Width="60" Padding="5,5,5,5" Background="#FFDF66" FontSize="10" FontFamily="Arial" Foreground="#333333" BorderThickness="0" Name="QuitBtn" Command="{Binding Quit, Mode=OneWay}">
                 Quit
             </Button>
         </StackPanel>
