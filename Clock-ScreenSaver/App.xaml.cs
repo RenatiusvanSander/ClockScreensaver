@@ -30,6 +30,7 @@ namespace Clock_ScreenSaver
         private const string P = "/p";
         private const string I = "/i";
 
+        // Is the screensaver file. This copied to user's temp folder.
         private const string SCR_FILE_NAME = "Clock-ScreenSaver.scr";
 
         // This are important varies for the preview.
@@ -138,13 +139,18 @@ namespace Clock_ScreenSaver
                 window.Show();
             }
 
-            // Sets every other screen owned to prmary window.
-            // It closes all windows at once.
-            foreach (Window window in Current.Windows)
+            // Sets owner window to primary screen. This closes owner as well
+            // as other screen saver screens, if one of them is closed.
+            if (ownerWindow != null)
             {
-                if (window != ownerWindow)
+                // Sets every other screen owned to primary window.
+                // It closes all windows at once.
+                foreach (Window window in Current.Windows)
                 {
-                    window.Owner = ownerWindow;
+                    if (window != ownerWindow)
+                    {
+                        window.Owner = ownerWindow;
+                    }
                 }
             }
         }
@@ -234,7 +240,7 @@ namespace Clock_ScreenSaver
                 15,
                 screensaverFilePath);
 
-            // Now update Windows changes to screensaver.exe.
+            // Now update Windows registry changes to screensaver.exe.
             Win32API.SetScreenSaverSecure(1);
             Win32API.SetScreenSaverActive(1);
             Win32API.SetScreenSaverTimeout(15 * 60);
