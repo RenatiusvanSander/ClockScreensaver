@@ -5,15 +5,13 @@ namespace Clock_ScreenSaver.Models.LogicModel
 {
 
     /// <summary>
-    /// STores the logic for the clock.
+    /// Stores the logic for the clock.
     /// </summary>
-    public class ClockTimer : NotifyPropertyChangedBase
+    public class ClockTimer
     {
 
         // Defines some private varies.
         private Timer timer;
-        private string time;
-        private string date;
 
         /// <summary>
         /// Ctor.
@@ -42,6 +40,9 @@ namespace Clock_ScreenSaver.Models.LogicModel
         {
             Time = DateTime.Now.ToString("HH:mm:ss");
             Date = DateTime.Today.ToString("dd.MM.yyyy");
+
+            // Notifies ClockTimer has been elapsed.
+            ClockTimerElapsed.Invoke(this, e);
         }
 
         /// <summary>
@@ -55,39 +56,16 @@ namespace Clock_ScreenSaver.Models.LogicModel
         /// <summary>
         /// Property time for the clock.
         /// </summary>
-        public string Time
-        {
-            set
-            {
-                if(time != value)
-                {
-                    time = value;
-                    OnPropertyChanged();
-                }
-            }
-            get
-            {
-                return time;
-            }
-        }
+        public string Time { private set; get; }
 
         /// <summary>
         /// Property date for the clock.
         /// </summary>
-        public string Date
-        {
-            set
-            {
-                if(date != value)
-                {
-                    date = value;
-                    OnPropertyChanged();
-                }
-            }
-            get
-            {
-                return date;
-            }
-        }
+        public string Date { private set; get; }
+
+        #region clockTimerElapsed
+        public event EventHandler ClockTimerElapsed;
+
+        #endregion
     }
 }
