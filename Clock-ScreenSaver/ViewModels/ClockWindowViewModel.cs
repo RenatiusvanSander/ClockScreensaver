@@ -1,6 +1,5 @@
 ﻿using Clock_ScreenSaver.Models.LogicModel;
 using System;
-using System.ComponentModel;
 
 namespace Clock_ScreenSaver.ViewModels
 {
@@ -106,7 +105,7 @@ namespace Clock_ScreenSaver.ViewModels
         private void InitMembers()
         {
             clockTimer = new ClockTimer();
-            clockTimer.PropertyChanged += UpdateClockWindow;
+            clockTimer.ClockTimerElapsed += UpdateClockWindow;
 
             // Sets lock screen is true or false.
             isLockScreenActive = LockScreenActive.GetLockScreenActive();
@@ -118,7 +117,7 @@ namespace Clock_ScreenSaver.ViewModels
         /// <param name="sender">object</param>
         /// <param name="e">PropertyChangedEventArgs</param>
         private void UpdateClockWindow(object sender = null,
-            PropertyChangedEventArgs e = null)
+            EventArgs e = null)
         {
 
             // Updates prperties.

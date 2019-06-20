@@ -1,5 +1,5 @@
 ﻿using Clock_ScreenSaver.Models.LogicModel;
-using System.ComponentModel;
+using System;
 
 namespace Clock_ScreenSaver.ViewModels
 {
@@ -49,16 +49,16 @@ namespace Clock_ScreenSaver.ViewModels
         private void InitMembers()
         {
             clockTimer = new ClockTimer();
-            clockTimer.PropertyChanged += UpdateClockWindow;
+            clockTimer.ClockTimerElapsed += UpdateClockWindow;
         }
 
         /// <summary>
         /// Updates the clock of the screensaver on the view.
         /// </summary>
         /// <param name="sender">object</param>
-        /// <param name="e">PropertyChangedEventArgs</param>
-        private void UpdateClockWindow(object sender = null,
-            PropertyChangedEventArgs e = null)
+        /// <param name="e">EventArgs</param>
+        private void UpdateClockWindow(object sender,
+            EventArgs e)
         {
 
             // Updates properties.
